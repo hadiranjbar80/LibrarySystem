@@ -1,4 +1,19 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿
+const CreateCategory = () => {
+    $.get("/Categories/Create/", (result) => {
+        $("#myModal").modal();
+        $("#myModalLabel").html("");
+        $("#myModalBody").html(result);
+    })
+}
 
-// Write your JavaScript code.
+const DeleteCategory = (id) => {
+    $.ajax({
+        url: "/Categories/Delete/",
+        data: { id }
+    }).done((res) => {
+        $("#myModal").modal();
+        $("#myModalLabel").html("حذف دسته‌بندی");
+        $("#myModalBody").html(res);
+    });
+}

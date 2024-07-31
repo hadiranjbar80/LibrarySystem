@@ -65,6 +65,26 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("c11ea2a9-0ab9-474f-b7f2-b069fb4d2164"),
+                            Code = "10",
+                            Name = "برنامه نویسی"
+                        },
+                        new
+                        {
+                            Id = new Guid("232330be-86a1-45a1-a714-e71d2f1a0b73"),
+                            Code = "11",
+                            Name = "ریاضیات"
+                        },
+                        new
+                        {
+                            Id = new Guid("bcc429fa-5883-4c2e-95a3-138720f06048"),
+                            Code = "12",
+                            Name = "عمومی"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Book", b =>
