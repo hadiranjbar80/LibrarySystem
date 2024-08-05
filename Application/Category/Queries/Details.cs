@@ -35,7 +35,6 @@ namespace Application.Category.Queries
                 return Result<CategoryDto>.Success(new CategoryDto
                 {
                     Id = category.Id,
-                    Code = category.Code,
                     Name = category.Name,
                 });
             }

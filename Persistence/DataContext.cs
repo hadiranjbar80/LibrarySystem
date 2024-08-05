@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Entities.EntityMapper;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,26 +20,8 @@ namespace Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Category>().HasData(
-                new Category
-                {
-                    Id = Guid.NewGuid(),
-                    Code = "10",
-                    Name = "برنامه نویسی",
-                },
-                new Category
-                {
-                    Id = Guid.NewGuid(),
-                    Code = "11",
-                    Name = "ریاضیات",
-                },
-                new Category
-                {
-                    Id = Guid.NewGuid(),
-                    Code = "12",
-                    Name = "عمومی",
-                }
-            );
+            modelBuilder.ApplyConfiguration(new BookMap());
+            modelBuilder.ApplyConfiguration(new CategoryMap());
         }
     }
 }

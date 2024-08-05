@@ -18,9 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Book\Dtos\" />
     <Folder Include="Book\Validations\" />
-    <Folder Include="Book\Queries\" />
     <Folder Include="Category\Validations\" />
   </ItemGroup>
 

@@ -26,6 +26,7 @@ namespace Web.Controllers
             {
                 message = message,
                 title = title,
+                icon = type.ToString(),
                 type = type.ToString(),
                 provider = _config["NotificationProvider"]
             };

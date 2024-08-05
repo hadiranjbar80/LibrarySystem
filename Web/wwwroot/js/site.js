@@ -17,3 +17,15 @@ const DeleteCategory = (id) => {
         $("#myModalBody").html(res);
     });
 }
+
+const DeleteBook = (id) => {
+    console.log(id)
+    $.ajax({
+        url: "/Books/DeleteBook/",
+        data: { id }
+    }).done((res) => {
+        $("#myModal").modal();
+        $("#myModalLabel").html("حذف کتاب");
+        $("#myModalBody").html(res);
+    })
+}

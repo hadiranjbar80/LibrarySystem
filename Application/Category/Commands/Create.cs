@@ -33,8 +33,7 @@ namespace Application.Category.Commands
             {
                 _context.Categories.Add(new Domain.Entities.Category
                 {
-                    Code = Guid.NewGuid().ToString().Replace("-","").Substring(0,4),
-                    Name = request.Category.Name,
+                    Name = request.Category.Name
                 });
 
                 var result = await _context.SaveChangesAsync() > 0;

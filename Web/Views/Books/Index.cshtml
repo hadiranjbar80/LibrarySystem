@@ -1,0 +1,60 @@
+﻿@using Application.Book.Dtos
+@model List<BookListDto>
+
+<p>
+    <a asp-action="AddBook" class="btn btn-primary">افزودن کتاب</a>
+</p>
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">لیست کتاب‌ها</h3>
+
+        <div class="card-tools">
+            <div class="input-group input-group-sm" style="width: 150px;">
+                <input type="text" name="table_search" class="form-control float-right" placeholder="جستجو">
+
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body table-responsive p-0">
+        <table class="table table-hover">
+            <tbody>
+                <tr>
+                    <th>شماره کتاب</th>
+                    <th>نام کتاب</th>
+                    <th>دسته‌بندی</th>
+                    <th>نویسنده</th>
+                    <th>ناشر</th>
+                    <th>وضعیت</th>
+                    <th></th>
+                </tr>
+                @foreach (var book in Model)
+                {
+                    <tr>
+                        <td>@book.Code</td>
+                        <td>@book.Name</td>
+                        <td>@book.Category.Name</td>
+                        <td>@book.Author</td>
+                        <td>@book.Publisher</td>
+                        <td><span class="badge badge-primary">تایید شده</span></td>
+                        <td>
+                            <a asp-action="EditBook" asp-route-id="@book.Id" class='btn btn-warning'><i class='fa fa-pencil'></i></a>
+                            <button onclick="DeleteBook('@book.Id')" class='btn btn-danger'><i class='fa fa-trash-o'></i></button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>
+
+<partial name="_Modal" />
+
+@section Scripts {
+    <script src="~/js/site.js"></script>
+}

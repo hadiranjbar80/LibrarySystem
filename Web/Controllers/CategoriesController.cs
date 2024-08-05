@@ -1,6 +1,7 @@
 ﻿using Application.Category.Commands;
 using Application.Category.Dtos;
 using Application.Category.Queries;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
@@ -45,9 +46,9 @@ namespace Web.Controllers
         #region Category Deletion
 
         [HttpGet]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            var result = await Mediator.Send(new Details.Query { Id = Guid.Parse(id) });
+            var result = await Mediator.Send(new Details.Query { Id = id });
             return PartialView(result.Value);
         }
 

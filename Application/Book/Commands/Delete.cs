@@ -6,7 +6,10 @@ namespace Application.Book.Commands
 {
     public class Delete
     {
-        public class Command : IRequest<Result<Unit>> { }
+        public class Command : IRequest<Result<Unit>> 
+        {
+            public Guid Id { get; set; }
+        }
 
         public class Handler : IRequestHandler<Command, Result<Unit>>
         {
@@ -17,9 +20,19 @@ namespace Application.Book.Commands
                 _context = context;
             }
 
-            public Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                var book = await _context.Books.FindAsync(request.Id);
+
+                if(book == null) return null;
+
+                _context.Remove(book);
+
+                var result = await _context.SaveChangesAsync() > 0;
+
+                if(!result) return Result<Unit>.Failure("Failed to delete the book");
+
+                return Result<Unit>.Success(Unit.Value); 
             }
         }
     }
