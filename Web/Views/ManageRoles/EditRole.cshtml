@@ -1,0 +1,25 @@
+﻿@model AddRolesViewModel
+@{
+    ViewData["Title"] = "EditRole";
+}
+
+<div class="card card-info">
+    <div class="card-header">
+        <h3 class="card-title">ویرایش نقش</h3>
+    </div>
+    <form class="form-horizontal" asp-controller="ManageRoles" asp-action="EditRole" asp-route-id="@Model.Id" method="post">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="card-body">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">عنوان</label>
+
+                <div class="col-sm-10">
+                    <input asp-for="Name" class="form-control" placeholder="عنوان نقش را وارد کنید">
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-info">ثبت</button>
+        </div>
+    </form>
+</div>

@@ -1,5 +1,7 @@
-﻿@using Application.Book.Dtos
-@model List<BookListDto>
+﻿@model List<BookListDto>
+@{
+    ViewData["Title"] = "لیست کتاب‌ها";
+}
 
 <p>
     <a asp-action="AddBook" class="btn btn-primary">افزودن کتاب</a>

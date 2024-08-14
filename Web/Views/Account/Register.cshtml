@@ -1,0 +1,77 @@
+@model RegisterViewModel
+
+<div class="card card-info">
+    <div class="card-header">
+        <h3 class="card-title">ثبت کاربر جدید</h3>
+    </div>
+    <form asp-action="Register" asp-controller="Account" method="post" enctype="multipart/form-data">
+        <div class="card-body">
+            <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row col-12">
+                    <div class="form-group col-4">
+                        <label asp-for="RegisterCode"></label>
+                        <input readonly asp-for="RegisterCode" class="form-control" />
+                        <span asp-validation-for="RegisterCode" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-4">
+                        <label asp-for="FirstName"></label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-4">
+                        <label asp-for="LastName"></label>
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row col-12">
+                    <div class="form-group col-4">
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-4">
+                        <label asp-for="UserName"></label>
+                        <input asp-for="UserName" class="form-control" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-4">
+                        <label asp-for="Address"></label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row col-12">
+                    <div class="form-group col-4">
+                        <label asp-for="PhoneNumber"></label>
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-4">
+                        <label asp-for="BirthDate"></label>
+                        <input type="text" name="BirthDate" data-jdp class="form-control" id="BirthDate" />
+                        <span asp-validation-for="BirthDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-4">
+                        <label asp-for="File"></label>
+                        <input asp-for="File" class="form-control" />
+                        <span asp-validation-for="File" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <input type="submit" class="btn btn-info" value="ثبت" />
+                    <a asp-action="Index" asp-controller="ManageUsers" class="btn btn-outline-danger">بازگشت</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="/js/site.js"></script>
+
+    <script>
+        jalaliDatepicker.startWatch();
+    </script>
+}

@@ -1,9 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@inject SignInManager<AppUser> SignInManager
+<!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>پنل مدیریت | داشبورد اول</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -30,11 +31,15 @@
     <link rel="stylesheet" href="~/dist/css/bootstrap-rtl.min.css">
     <!-- template rtl version -->
     <link rel="stylesheet" href="~/dist/css/custom-style.css">
-    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'></link>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css' />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
-    <title>@ViewData["Title"] - Web</title>
+
+    <link rel="stylesheet" href="~/dist/css/jalalidatepicker.min.css" />
+
+    <title>@ViewData["Title"]</title>
 
 </head>
+
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
 
@@ -53,7 +58,7 @@
                     <!-- Sidebar user panel (optional) -->
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img src="" class="img-circle elevation-2" alt="User Image">
+                            <img src="#" class="img-circle elevation-2" alt="User Image">
                         </div>
                         <div class="info">
                             <a href="#" class="d-block">نام کاربری</a>
@@ -62,37 +67,90 @@
 
                     <!-- Sidebar Menu -->
                     <nav class="mt-2">
-                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                            <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fa fa-book"></i>
-                                    <p>
-                                        کتاب ها
-                                        <i class="right fa fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                            data-accordion="false">
+                            @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin") ||
+                                User.IsInRole("Programmer") || User.IsInRole("Manager") || User.IsInRole("Booker"))
+                            {
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fa fa-book"></i>
+                                        <p>
+                                            کتاب ها
+                                            <i class="right fa fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
 
-                                    <li class="nav-item">
-                                        <a href="/books" class="nav-link">
-                                            <i class="fa fa-circle-o nav-icon"></i>
-                                            <p>لیست کتاب‌ها</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="/categories" class="nav-link">
-                                            <i class="fa fa-circle-o nav-icon"></i>
-                                            <p>دسته‌بندی‌ها</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="pages/charts/inline.html" class="nav-link">
-                                            <i class="fa fa-circle-o nav-icon"></i>
-                                            <p>نمودار Inline</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+                                        <li class="nav-item">
+                                            <a href="/books" class="nav-link">
+                                                <i class="fa fa-circle-o nav-icon"></i>
+                                                <p>لیست کتاب‌ها</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/categories" class="nav-link">
+                                                <i class="fa fa-circle-o nav-icon"></i>
+                                                <p>دسته‌بندی‌ها</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
+                            @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin") ||
+                                User.IsInRole("Programmer") || User.IsInRole("Manager"))
+                            {
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fa fa-users"></i>
+                                        <p>
+                                            مدیریت کاربران
+                                            <i class="right fa fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+
+                                        <li class="nav-item">
+                                            <a href="/ManageUsers" class="nav-link">
+                                                <i class="fa fa-circle-o nav-icon"></i>
+                                                <p>لیست کاربران</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
+                            @if (SignInManager.IsSignedIn(User) && User.IsInRole("Programmer"))
+                            {
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fa fa-users"></i>
+                                        <p>
+                                            مدیریت نقش‌ها
+                                            <i class="right fa fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+
+                                        <li class="nav-item">
+                                            <a href="/ManageRoles" class="nav-link">
+                                                <i class="fa fa-circle-o nav-icon"></i>
+                                                <p>لیست نقش‌ها</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <li class="nav-item">
+                                    <form asp-action="Logout" asp-controller="Account" method="post" class="nav-link">
+                                        <i class="nav-icon fa fa-sign-out"></i>
+                                        <button type="submit">
+                                            خروج
+                                        </button>
+                                    </form>
+                                </li>
+                            }
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->
@@ -166,7 +224,11 @@
     <!-- AdminLTE for demo purposes -->
     <script src="~/dist/js/demo.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="~/dist/js/jalalidatepicker.min.js"></script>
+
     @await Html.PartialAsync("_notificationPartial")
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>

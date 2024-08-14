@@ -1,0 +1,85 @@
+﻿@model EditUserViewModel
+
+@{
+    ViewData["Title"] = "ویرایش کاربر";
+}
+
+<div class="card card-info">
+    <div class="card-header">
+        <h3 class="card-title">ثبت کاربر جدید</h3>
+    </div>
+    <form asp-action="EditUser" asp-controller="ManageUsers" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+        <div class="card-body">
+            <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row col-12">
+                    <div class="form-group col-4">
+                        <label asp-for="FirstName"></label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-4">
+                        <label asp-for="LastName"></label>
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-4">
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row col-12">
+                    <div class="form-group col-4">
+                        <label asp-for="UserName"></label>
+                        <input asp-for="UserName" class="form-control" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-4">
+                        <label asp-for="Address"></label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-4">
+                        <label asp-for="PhoneNumber"></label>
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row col-12">
+                    <div class="form-group col-4">
+                        <label asp-for="BirthDate"></label>
+                        <input asp-for="BirthDate" type="text" data-jdp class="form-control" />
+                        <span asp-validation-for="BirthDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-4">
+                        <label asp-for="File"></label>
+                        <input asp-for="File" class="form-control" />
+                        <span asp-validation-for="File" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-2">
+                        <label asp-for="IsActive"></label>
+                       <div class="row">
+                            <input type="radio" class="m-2" name="IsActive" value="true" @(Model.IsActive ? "checked" : "") /> فعال
+                            
+                            <input type="radio" class="m-2" name="IsActive" value="false" @(!Model.IsActive ? "checked" : "")  /> غیرفعال
+                       </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <input type="submit" class="btn btn-info" value="ثبت" />
+                    <a asp-action="Index" asp-controller="ManageUsers" class="btn btn-outline-danger">بازگشت</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="/js/site.js"></script>
+
+    <script>
+        jalaliDatepicker.startWatch();
+    </script>
+}

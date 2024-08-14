@@ -1,0 +1,68 @@
+@model List<UsersListViewModel>
+
+@{
+    ViewData["Title"] = "لیست کاربران";
+}
+
+<p>
+    <a class="btn btn-primary" href="/Register">ثبت نام کاربر جدید</a>
+</p>
+
+<div class="card">
+    <div class="card-header border-transparent">
+        <h3 class="card-title">لیست اعضا</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table m-0">
+                <thead>
+                    <tr>
+                        <th>تصویر</th>
+                        <th>شماره عضویت</th>
+                        <th>نام و نام خانوادگی</th>
+                        <th>آدرس</th>
+                        <th>تاریخ تولد</th>
+                        <th>شماره موبایل</th>
+                        <th>وضعیت</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td><img style="width: 100px; height: 100px" src="~/Images/@user.Image" /></td>
+                            <td>@user.RegisterCode</td>
+                            <td>@user.FirstName @user.LastName</td>
+                            <td>@user.Address</td>
+                            <td>@user.BirthDate.ToString()</td>
+                            <td>@user.PhoneNumber</td>
+                            @if (user.IsActive)
+                            {
+                                <td><span class="badge badge-success">فعال</span></td>
+                            }
+                            else
+                            {
+                                <td><span class="badge badge-danger">غیرفعال</span></td>
+                            }
+                            <td>
+                                <a asp-action="EditUser" asp-controller="ManageUsers" asp-route-id="@user.Id" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                <button onclick="AddUserToRole('@user.Id')">Add</button>
+                                <button onclick="RemoveUserFromRole('@user.Id')">Remove</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.table-responsive -->
+    </div>
+    <!-- /.card-body -->
+</div>
+
+<partial name="_Modal" />
+
+@section Scripts {
+    <script src="~/js/site.js"></script>
+}

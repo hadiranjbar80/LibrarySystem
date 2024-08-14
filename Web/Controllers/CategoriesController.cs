@@ -2,10 +2,12 @@
 using Application.Category.Dtos;
 using Application.Category.Queries;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
 {
+    [Authorize(Roles = "Admin, Programmer, Manager, Booker")]
     public class CategoriesController : BaseController
     {
         public CategoriesController(IConfiguration configuration)

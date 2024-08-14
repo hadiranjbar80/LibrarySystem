@@ -1,0 +1,35 @@
+﻿@model AddUserToRoleViewModel
+@{
+    ViewData["Title"] = "افزودن نقش به کاربر";
+}
+
+<div class="card card-info">
+    <div class="card-header">
+        <h3 class="card-title">افزودن نقش به کاربر</h3>
+    </div>
+    <div class="card-body">
+
+        @if (!Model.UserRoles.Any())
+        {
+            <h6>هیچ مقامی یافت نشد</h6>
+        }
+        else
+        {
+            <form asp-controller="ManageUsers" asp-action="AddUserToRole" method="post">
+                <div asp-validation-summary="ModelOnly"></div>
+
+                @for (int i = 0; i < Model.UserRoles.Count; i++)
+                {
+                    <div class="form-group">
+                        <input asp-for="@Model.UserRoles[i].IsSelected" />
+                        <label>@Model.UserRoles[i].RoleName</label>
+
+                        <input type="hidden" asp-for="@Model.UserRoles[i].RoleName" />
+                    </div>
+                }
+                <input type="hidden" asp-for="@Model.UserId" />
+                <button class="btn btn-info" type="submit">ثبت</button>
+            </form>
+        }
+    </div>
+</div>

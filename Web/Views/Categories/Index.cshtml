@@ -1,45 +1,45 @@
 ﻿@model Result<List<CategoryDto>>
 @{
-    ViewData["Title"] = "";
+    ViewData["Title"] = "لیست دسته‌بندی‌ها";
 }
 
- <p>
-     <button onclick="CreateCategory()" class="btn btn-primary">جدید</button>
- </p>
+<p>
+    <button onclick="CreateCategory()" class="btn btn-primary">جدید</button>
+</p>
 
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">دسته‌بندی ها</h3>
-                <div class="card-tools">
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" name="table_search" class="form-control float-right" placeholder="جستجو" />
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">دسته‌بندی ها</h3>
+        <div class="card-tools">
+            <div class="input-group input-group-sm" style="width: 150px;">
+                <input type="text" name="table_search" class="form-control float-right" placeholder="جستجو" />
 
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                        </div>
-                    </div>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                 </div>
             </div>
-            <!-- /.card-header -->
-            <div class="card-body table-responsive p-0">
-                <table class="table table-hover">
-                    <tbody>
-                        <tr>
-                            <th>نام</th>
-                            <th></th>
-                        </tr>
-                        @foreach (var category in Model.Value)
-                        {
-                                <tr>
-                                    <td>@category.Name</td>
-                                    <td><button class="btn btn-danger" onclick="DeleteCategory('@category.Id')"><i class="fa fa-trash-o"></i></button></td>
-                                </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-            <!-- /.card-body -->
         </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body table-responsive p-0">
+        <table class="table table-hover">
+            <tbody>
+                <tr>
+                    <th>نام</th>
+                    <th></th>
+                </tr>
+                @foreach (var category in Model.Value)
+                {
+                    <tr>
+                        <td>@category.Name</td>
+                        <td><button class="btn btn-danger" onclick="DeleteCategory('@category.Id')"><i class="fa fa-trash-o"></i></button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>
 
 
 <partial name="_Modal" />

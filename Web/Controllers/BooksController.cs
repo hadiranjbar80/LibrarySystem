@@ -6,13 +6,20 @@ using Domain.Shared;
 using System.Text.RegularExpressions;
 using Application.Core;
 using Application.Category.Dtos;
+using Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Web.Controllers
 {
+    [Authorize(Roles = "Admin, Programmer, Manager, Booker")]
     public class BooksController : BaseController
     {
-        public BooksController(IConfiguration config)
-            : base(config) { }
+        private readonly ICommonMethods _commonMethods;
+        public BooksController(IConfiguration config, ICommonMethods commonMethods)
+            : base(config)
+        {
+            _commonMethods = commonMethods;
+        }
 
         public async Task<IActionResult> Index()
         {
@@ -25,10 +32,9 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<IActionResult> AddBook()
         {
-            var bookCode = Regex.Replace(Guid.NewGuid().ToString().Replace("-", ""), "[A-Za-z ]", "");
             return View(new BookDto
             {
-                Code = bookCode.Substring(0, 5),
+                Code = _commonMethods.GenerateCode(),
                 Categories = await GetCategories()
             });
         }
