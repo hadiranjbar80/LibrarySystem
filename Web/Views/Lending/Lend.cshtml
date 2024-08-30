@@ -1,0 +1,73 @@
+﻿@model LendViewModel
+@{
+    ViewData["Title"] = "امانت کتاب";
+}
+
+<div class="card card-info">
+    <div class="card-header">
+        <h3 class="card-title">امانت کتاب</h3>
+    </div>
+    <div class="card-body">
+        <form asp-action="Lend" method="post">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>انتخاب کاربر</label>
+                        <select class="form-control select2" name="selectedUser" style="width: 100%;">
+                            <option value="" selected>انتخاب کاربر</option>
+                            @foreach (var user in Model.UsersList)
+                            {
+                                <option value="@user.RegisterCode">@user.FirstName @user.LastName</option>
+                            }
+                        </select>
+                        <span asp-validation-for="SelectedUser" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>انتخاب کتاب</label>
+                        <select class="form-control select2" name="selectedBook" style="width: 100%;">
+                            <option value="" selected>انتخاب کتاب</option>
+                            @foreach(var book in Model.BooksList)
+                            {
+                                <option value="@book.Code">@book.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="SelectedBook" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="LendedAt"></label>
+                        <input readonly asp-for="LendedAt" class="form-control" />
+                        <span asp-validation-for="LendedAt" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="ReturnAt"></label>
+                        <input type="text" name="ReturnAt" data-jdp class="form-control" id="ReturnAt" />
+                        <span asp-validation-for="ReturnAt" class="text-danger"></span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-info">ثبت</button>
+                <a asp-action="Index" class="btn btn-outline-danger mr-2">بازگشت</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+        })
+
+        jalaliDatepicker.startWatch();
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

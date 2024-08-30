@@ -20,6 +20,8 @@
   <ItemGroup>
     <Folder Include="Book\Validations\" />
     <Folder Include="Category\Validations\" />
+    <Folder Include="Subscription\Validations\" />
+    <Folder Include="Subscription\Queries\" />
   </ItemGroup>
 
 </Project>

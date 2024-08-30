@@ -18,7 +18,8 @@ namespace Web.Extensions
                 opt.User.RequireUniqueEmail = true;
             })
             .AddEntityFrameworkStores<DataContext>()
-            .AddDefaultTokenProviders();
+            .AddDefaultTokenProviders()
+            .AddErrorDescriber<PersianIdentityErrorDescriber>();
 
             services.ConfigureApplicationCookie(opt=> {
                 opt.AccessDeniedPath = "/Account/AccessDenied";

@@ -17,6 +17,19 @@ namespace Infrastructure.Common
             return false;
         }
 
+        public string EmailTeplateReader(string title, string templateName,string link = null, string password = null)
+        {
+            string templatePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "EmailTemplates", templateName);
+            StreamReader reader = new(templatePath);
+            string emailBody = reader.ReadToEnd();
+
+            emailBody = emailBody.Replace("{{link}}", link);
+            emailBody = emailBody.Replace("{{title}}", title);
+            emailBody = emailBody.Replace("{{password}}", password);
+
+            return emailBody;
+        }
+
         public string GenerateCode(int startIndex = 0, int endIndex = 5)
         {
             var code = Regex.Replace(Guid.NewGuid().ToString().Replace("-", ""), "[A-Za-z ]", "");

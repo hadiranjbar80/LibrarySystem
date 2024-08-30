@@ -88,7 +88,7 @@ namespace Web.Controllers
                 user.Email = model.Email;
                 user.IsActive = model.IsActive;
 
-                if (model.File.Length > 0)
+                if (model.File != null && model.File.Length > 0)
                 {
                     _commonMethods.DeleteImage(user.ImageName);
                     user.ImageName = _commonMethods.SaveImage(model.File, _commonMethods.GenerateCode());
@@ -151,7 +151,6 @@ namespace Web.Controllers
         }
 
         #endregion
-
 
         #region RemoveUserFromRole
 

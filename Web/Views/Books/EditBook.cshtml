@@ -68,4 +68,8 @@
 
 @section Scripts {
     <script src="/js/site.js"></script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

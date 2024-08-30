@@ -1,0 +1,56 @@
+﻿@model List<Lending>
+
+@if (Model.Any())
+{
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">لیست امانت‌ها</h3>
+
+            <div class="card-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="جستجو">
+
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body table-responsive p-0">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th>شماره کتاب</th>
+                        <th>نام کتاب</th>
+                        <th>تاریخ امانت</th>
+                        <th>تاریخ برگشت</th>
+                        <th>وضعیت</th>
+                    </tr>
+                    @foreach (var lending in Model)
+                    {
+                        <tr>
+                            <td>@lending.Book.Code</td>
+                            <td>@lending.Book.Name</td>
+                            <td>@lending.LendedAt.ToString("yyyy/MM/dd")</td>
+                            <td>@lending.ReturnAt.ToString("yyyy/MM/dd")</td>
+                            @if (lending.IsBeingReturned)
+                            {
+                            <td><span class="badge badge-success">پس داده شده</span></td>
+                            }
+                            else
+                            {
+                            <td><span class="badge badge-danger">پس داده نشده</span></td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+}
+else
+{
+    <div class="alert alert-info">موردی یافت نشد</div>
+}

@@ -1,0 +1,150 @@
+﻿@{
+    ViewData["Title"] = "پروفایل کاربر";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                @await Component.InvokeAsync("ShowUserInfo")
+            </div>
+            <!-- /.col -->
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header p-2">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">‌لیست کتاب‌های گرفته شده</a></li>
+@*                             <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">تایم لاین</a></li>
+ *@                            <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">ویرایش اطلاعات</a></li>
+                        </ul>
+                    </div><!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="active tab-pane" id="activity">
+                                @await Component.InvokeAsync("ShowUserLendings")
+                            </div>
+                            <!-- /.tab-pane -->
+                            <div class="tab-pane" id="timeline">
+                                <!-- The timeline -->
+                                <ul class="timeline timeline-inverse">
+                                    <!-- timeline time label -->
+                                    <li class="time-label">
+                                        <span class="bg-danger">
+                                            ۱۰ Feb. ۲۰۱۴
+                                        </span>
+                                    </li>
+                                    <!-- /.timeline-label -->
+                                    <!-- timeline item -->
+                                    <li>
+                                        <i class="fa fa-envelope bg-primary"></i>
+
+                                        <div class="timeline-item">
+                                            <span class="time"><i class="fa fa-clock-o"></i> ۱۲:۰۵</span>
+
+                                            <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+
+                                            <div class="timeline-body">
+                                                Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+                                                weebly ning heekya handango imeem plugg dopplr jibjab, movity
+                                                jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+                                                quora plaxo ideeli hulu weebly balihoo...
+                                            </div>
+                                            <div class="timeline-footer">
+                                                <a href="#" class="btn btn-primary btn-sm">Read more</a>
+                                                <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <!-- END timeline item -->
+                                    <!-- timeline item -->
+                                    <li>
+                                        <i class="fa fa-user bg-info"></i>
+
+                                        <div class="timeline-item">
+                                            <span class="time"><i class="fa fa-clock-o"></i> ۵ mins ago</span>
+
+                                            <h3 class="timeline-header no-border">
+                                                <a href="#">Sarah Young</a> accepted your friend request
+                                            </h3>
+                                        </div>
+                                    </li>
+                                    <!-- END timeline item -->
+                                    <!-- timeline item -->
+                                    <li>
+                                        <i class="fa fa-comments bg-warning"></i>
+
+                                        <div class="timeline-item">
+                                            <span class="time"><i class="fa fa-clock-o"></i> ۲۷ mins ago</span>
+
+                                            <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
+
+                                            <div class="timeline-body">
+                                                Take me to your leader!
+                                                Switzerland is small and neutral!
+                                                We are more like Germany, ambitious and misunderstood!
+                                            </div>
+                                            <div class="timeline-footer">
+                                                <a href="#" class="btn btn-warning btn-flat btn-sm">View comment</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <!-- END timeline item -->
+                                    <!-- timeline time label -->
+                                    <li class="time-label">
+                                        <span class="bg-success">
+                                            ۳ Jan. ۲۰۱۴
+                                        </span>
+                                    </li>
+                                    <!-- /.timeline-label -->
+                                    <!-- timeline item -->
+                                    <li>
+                                        <i class="fa fa-camera bg-purple"></i>
+
+                                        <div class="timeline-item">
+                                            <span class="time"><i class="fa fa-clock-o"></i> ۲ days ago</span>
+
+                                            <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
+
+                                            <div class="timeline-body">
+                                                <img src="http://placehold.it/150x100" alt="..." class="margin">
+                                                <img src="http://placehold.it/150x100" alt="..." class="margin">
+                                                <img src="http://placehold.it/150x100" alt="..." class="margin">
+                                                <img src="http://placehold.it/150x100" alt="..." class="margin">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <!-- END timeline item -->
+                                    <li>
+                                        <i class="fa fa-clock-o bg-gray"></i>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- /.tab-pane -->
+
+                            <div class="tab-pane" id="settings">
+                                @await Component.InvokeAsync("EditUserProfile")
+                            </div>
+                            <!-- /.tab-pane -->
+                        </div>
+                        <!-- /.tab-content -->
+                    </div><!-- /.card-body -->
+                </div>
+                <!-- /.nav-tabs-custom -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+
+@section Scripts {
+    <script src="/js/site.js"></script>
+
+    <script>
+        jalaliDatepicker.startWatch();
+    </script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

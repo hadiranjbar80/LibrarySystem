@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="~/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
     <!-- Date Picker -->
     <link rel="stylesheet" href="~/plugins/datepicker/datepicker3.css">
+    <link rel="stylesheet" href="~/plugins/select2/select2.min.css" />
     <!-- Daterange picker -->
     <link rel="stylesheet" href="~/plugins/daterangepicker/daterangepicker-bs3.css">
     <!-- bootstrap wysihtml5 - text editor -->
@@ -35,7 +36,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
 
     <link rel="stylesheet" href="~/dist/css/jalalidatepicker.min.css" />
-
+    <link rel="stylesheet" href="~/css/site.css" />
     <title>@ViewData["Title"]</title>
 
 </head>
@@ -56,14 +57,7 @@
             <div class="sidebar" style="direction: ltr">
                 <div style="direction: rtl">
                     <!-- Sidebar user panel (optional) -->
-                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                        <div class="image">
-                            <img src="#" class="img-circle elevation-2" alt="User Image">
-                        </div>
-                        <div class="info">
-                            <a href="#" class="d-block">نام کاربری</a>
-                        </div>
-                    </div>
+                   @await Component.InvokeAsync("SidebarUserPanel");
 
                     <!-- Sidebar Menu -->
                     <nav class="mt-2">
@@ -92,6 +86,12 @@
                                             <a href="/categories" class="nav-link">
                                                 <i class="fa fa-circle-o nav-icon"></i>
                                                 <p>دسته‌بندی‌ها</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/Lending" class="nav-link">
+                                                <i class="fa fa-circle-o nav-icon"></i>
+                                                <p>امانت‌ها</p>
                                             </a>
                                         </li>
                                     </ul>
@@ -190,6 +190,7 @@
     <script src="~/plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="../../plugins/select2/select2.full.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button)

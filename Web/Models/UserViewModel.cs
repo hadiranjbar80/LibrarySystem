@@ -46,7 +46,6 @@ namespace Web.Models
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public DateTime BirthDate { get; set; }
         [DisplayName("تصویر")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public IFormFile File { get; set; }
         [DisplayName("وضعیت")]
         public bool IsActive { get; set; }
@@ -91,5 +90,56 @@ namespace Web.Models
 
         public string RoleName { get; set; }
         public bool IsSelected { get; set; }
+    }
+
+    public class EditUserProfileInfoViewModel
+    {
+        public string Id { get; set; }
+        [DisplayName("نام")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        public string FirstName { get; set; }
+        [DisplayName("نام خانوادگی")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        public string LastName { get; set; }
+        [DisplayName("نام کاربری")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        public string UserName { get; set; }
+        [DisplayName("آدرس")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        public string Address { get; set; }
+        [DisplayName("تاریخ تولد")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        public DateTime BirthDate { get; set; }
+        [DisplayName("تصویر")]
+        public IFormFile File { get; set; }
+    }
+
+    public class ResetPasswordViewModel
+    {
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [Display(Name = "کلمه‌عبور قبل")]
+        [DataType(DataType.Password)]
+        public string OldPassword { get; set; }
+
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [Display(Name = "کلمه‌عبور جدید")]
+        [DataType(DataType.Password)]
+        public string NewPassword { get; set; }
+
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [Display(Name = "تکرار کلمه‌عبور جدید")]
+        [Compare(nameof(NewPassword))]
+        [DataType(DataType.Password)]
+        public string ConfirmPassword { get; set; }
+
+        public string ReturnUrl { get; set; }
+    }
+
+    public class ForgotPasswordViewModel
+    {
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [DisplayName("ایمیل")]
+        [EmailAddress(ErrorMessage = "ایمیل وارد شده معتبر نمی‌باشد")]
+        public string Email { get; set; }
     }
 }

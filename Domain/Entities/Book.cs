@@ -13,6 +13,9 @@ namespace Domain.Entities
         public string Name { get; set; }
         public string Author { get; set; }
         public string Publisher { get; set; }
+
+        // Navigation props
         public Category Category { get; set; }
+        public ICollection<Lending> Lendings { get; set; }
     }
 }

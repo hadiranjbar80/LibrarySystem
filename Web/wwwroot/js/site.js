@@ -60,3 +60,7 @@ const RemoveUserFromRole = (id) => {
         $("#myModalBody").html(result);
     })
 }
+
+const SubmitReturnBookForm = () => {
+    $("#returnBookForm").submit();
+}

@@ -1,4 +1,5 @@
 using Application.Category.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -17,7 +18,10 @@ namespace Web.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            if (User.IsInRole("User"))
+                return RedirectToAction("Index", "Profile");
+
+            return RedirectToAction("Index", "Books");
         }
     }
 }

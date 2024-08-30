@@ -1,0 +1,74 @@
+﻿@model UserInfoViewModel
+
+<div class="card card-primary card-outline">
+    <div class="card-body box-profile">
+        <div class="text-center">
+            <img class="profile-user-img img-fluid img-circle" src="~/Images/@Model.ImageName" alt="User profile picture">
+        </div>
+
+        <h3 class="profile-username text-center">@Model.FullName</h3>
+
+        <ul class="list-group list-group-unbordered mb-3">
+            <li class="list-group-item">
+                <b>شماره عضویت: </b>@Model.RegisterCode
+            </li>
+            <li class="list-group-item">
+                <b>شماره موبایل: </b>@Model.PhoneNumber
+            </li>
+            @if (Model.SubscriptionExpireDate != null)
+            {
+                <li class="list-group-item">
+                    <b>تاریخ انقضا: </b>@Model.SubscriptionExpireDate
+                </li>
+            }
+        </ul>
+
+        @if (Model.SubscriptionExpireDate == null ||
+        (Model.SubscriptionExpireDate != null &&
+        (DateTime.Now >= DateTime.Parse(Model.SubscriptionExpireDate))))
+        {
+            <form asp-action="AddSubscription" asp-controller="Subscription" method="post">
+                <button style="submit" class="btn btn-primary btn-block"><b>تمدید اشتراک</b></button>
+            </form>
+        }
+    </div>
+    <!-- /.card-body -->
+</div>
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">اطلاعات کاربری</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <strong><i class="fa fa-envelope mr-1"></i> ایمیل</strong>
+
+        <p class="text-muted">
+            @Model.Email
+        </p>
+
+        <hr>
+
+        <strong><i class="fa fa-map-marker mr-1"></i> آدرس</strong>
+
+        <p class="text-muted">@Model.Address</p>
+
+        <hr>
+
+        <strong><i class="fa fa-calendar mr-1"></i> ‌تاریخ ثبت‌ نام</strong>
+
+        <p class="text-muted">@Model.RegisteredAt</p>
+
+        <hr>
+
+        <strong><i class="fa fa-calendar mr-1"></i> ‌تاریخ تولد</strong>
+
+        <p class="text-muted">@Model.BirthDate</p>
+
+        <hr>
+
+        <strong><i class="fa fa-file-text-o mr-1"></i> نام کاربری</strong>
+
+        <p class="text-muted">@Model.UserName</p>
+    </div>
+    <!-- /.card-body -->
+</div>

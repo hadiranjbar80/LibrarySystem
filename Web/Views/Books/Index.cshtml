@@ -31,7 +31,6 @@
                     <th>دسته‌بندی</th>
                     <th>نویسنده</th>
                     <th>ناشر</th>
-                    <th>وضعیت</th>
                     <th></th>
                 </tr>
                 @foreach (var book in Model)
@@ -42,7 +41,6 @@
                         <td>@book.Category.Name</td>
                         <td>@book.Author</td>
                         <td>@book.Publisher</td>
-                        <td><span class="badge badge-primary">تایید شده</span></td>
                         <td>
                             <a asp-action="EditBook" asp-route-id="@book.Id" class='btn btn-warning'><i class='fa fa-pencil'></i></a>
                             <button onclick="DeleteBook('@book.Id')" class='btn btn-danger'><i class='fa fa-trash-o'></i></button>

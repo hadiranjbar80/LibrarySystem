@@ -5,6 +5,8 @@ using Application.Interfaces;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Infrastructure.Common;
+using Infrastructure.Common.Models;
+using Infrastructure.Security;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -18,10 +20,12 @@ namespace Web.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
+            services.AddScoped<ChangePasswordResourceFilter>();
             services.AddControllersWithViews(opt =>
             {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 opt.Filters.Add(new AuthorizeFilter(policy));
+                opt.Filters.Add(typeof(ChangePasswordResourceFilter));
             });
             services.AddDbContext<DataContext>(opt =>
             {
@@ -32,6 +36,13 @@ namespace Web.Extensions
             services.AddFluentValidationAutoValidation();
             services.AddValidatorsFromAssemblyContaining<Create>();
             services.AddScoped<ICommonMethods, CommonMethods>();
+            services.AddScoped<IUserAccessor, UserAccessor>();
+            services.AddScoped<ICheckerMethods, CheckerMethods>();
+            services.AddScoped<IBookAccessor, BookAccessor>();
+            services.AddScoped<IMailService, MailService>();
+            services.Configure<EmailSetting>(config.GetSection("EmailSetting"));
+
+
             CultureInfo.DefaultThreadCurrentCulture
               = CultureInfo.DefaultThreadCurrentUICulture
               = PersianDateExtensionMethods.GetPersianCulture();

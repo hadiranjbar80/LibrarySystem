@@ -11,7 +11,11 @@ namespace Domain.Entities
         public string ImageName { get; set; }
         public DateTime BirthDate { get; set; }
         public DateTime RegisteredAt { get; set; }
-        public bool IsPasswordChaned { get; set; } = false;
+        public bool IsPasswordChanged { get; set; } = false;
         public bool IsActive { get; set; } = false;
+
+        // Navigation props
+        public Subscription Subscription { get; set; }
+        public ICollection<Lending> Lendings { get; set; }
     }
 }
