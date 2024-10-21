@@ -21,9 +21,10 @@ namespace Web.Controllers
             _bookAccessor = bookAccessor;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchQuery = null)
         {
-            var lendings = await Mediator.Send(new Application.Lending.Queries.List.Query { });
+            var lendings = await Mediator.Send(new Application.Lending.Queries.List.Query { SearchQuery = searchQuery });
+            ViewBag.SearchQuery = searchQuery;
             return View(lendings.Value);
         }
 

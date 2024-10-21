@@ -64,3 +64,7 @@ const RemoveUserFromRole = (id) => {
 const SubmitReturnBookForm = () => {
     $("#returnBookForm").submit();
 }
+
+$('.table_search').on('change', () => {
+    console.log("change")
+})

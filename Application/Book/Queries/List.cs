@@ -10,7 +10,10 @@ namespace Application.Book.Queries
 {
     public class List
     {
-        public class Query : IRequest<Result<List<BookListDto>>> { }
+        public class Query : IRequest<Result<List<BookListDto>>> 
+        {
+            public string SearchQuery { get; set; }
+        }
 
         public class Handler : IRequestHandler<Query, Result<List<BookListDto>>>
         {
@@ -28,6 +31,11 @@ namespace Application.Book.Queries
                     .Include(x=>x.Category)
                     .ProjectTo<BookListDto>(_mapper.ConfigurationProvider)
                     .ToListAsync();
+
+                if (request.SearchQuery != null) 
+                {
+                    books = books.Where(b => b.Name.Contains(request.SearchQuery) || b.Code == request.SearchQuery).ToList();
+                }
 
                 return Result<List<BookListDto>>.Success(books);
             }

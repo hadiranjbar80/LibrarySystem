@@ -24,8 +24,8 @@ namespace Web.Controllers
             _roleManager = roleManager;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Index()
+       // [HttpGet]
+        public async Task<IActionResult> Index(string q)
         {
             var users = await _userManager.Users.ToListAsync();
             var usersListViewModel = new List<UsersListViewModel>();
@@ -44,6 +44,14 @@ namespace Web.Controllers
                     IsActive = user.IsActive
                 });
             }
+
+            if(q != null)
+            {
+                usersListViewModel = usersListViewModel
+                    .Where(u=>u.RegisterCode == q || u.FirstName.Contains(q) || u.LastName.Contains(q)).ToList();
+            }
+
+            ViewBag.q = q;
             return View(usersListViewModel);
         }
 

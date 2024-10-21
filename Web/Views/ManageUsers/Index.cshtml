@@ -11,6 +11,16 @@
 <div class="card">
     <div class="card-header border-transparent">
         <h3 class="card-title">لیست اعضا</h3>
+
+        <div class="card-tools">
+            <form asp-action="Index" method="post" class="input-group input-group-sm" style="width: 150px;">
+                <input type="text" name="q" value="@ViewBag.q" class="form-control float-right" placeholder="جستجو">
+
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
+        </div>
     </div>
     <!-- /.card-header -->
     <div class="card-body p-0">

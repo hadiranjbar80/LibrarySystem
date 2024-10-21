@@ -21,9 +21,10 @@ namespace Web.Controllers
             _commonMethods = commonMethods;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchQuery = null)
         {
-            var result = await Mediator.Send(new Application.Book.Queries.List.Query { });
+            var result = await Mediator.Send(new Application.Book.Queries.List.Query { SearchQuery = searchQuery});
+            ViewBag.SearchQuery = searchQuery;
             return View(result.Value);
         }
 

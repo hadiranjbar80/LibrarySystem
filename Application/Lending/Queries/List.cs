@@ -10,7 +10,10 @@ namespace Application.Lending.Queries
 {
     public class List
     {
-        public class Query : IRequest<Result<List<LendingListDto>>> { }
+        public class Query : IRequest<Result<List<LendingListDto>>> 
+        {
+            public string SearchQuery { get; set; }
+        }
 
         public class Handler : IRequestHandler<Query, Result<List<LendingListDto>>>
         {
@@ -29,6 +32,11 @@ namespace Application.Lending.Queries
                     .ProjectTo<LendingListDto>(_mapper.ConfigurationProvider)
                     .AsNoTracking()
                     .ToListAsync();
+
+                if(request.SearchQuery != null)
+                {
+                    query = query.Where(l=>l.BookCode == request.SearchQuery || l.BookName.Contains(request.SearchQuery)).ToList();
+                }
 
                 return Result<List<LendingListDto>>.Success(query);
             }
